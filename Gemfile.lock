@@ -24,13 +24,13 @@ GIT
       rake-pipeline (~> 0.6)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
-    colored (1.2)
     execjs (2.0.1)
     json (1.8.0)
     multi_json (1.8.0)
     rack (1.5.2)
+    rack-rewrite (1.2.1)
     rake (10.0.4)
     thor (0.18.1)
     uglifier (1.0.4)
@@ -41,9 +41,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  colored
   ember-docs!
-  json
+  rack-rewrite (~> 1.2.1)
   rake-pipeline!
   rake-pipeline-web-filters!
   uglifier (~> 1.0.3)
