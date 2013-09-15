@@ -1,14 +1,3 @@
-production = ENV['BUILD_ENV'] == 'production'
-
-distfiles = %w{
-  namespace.js
-  initializer.js
-  route.js
-  controller.js
-  listener.js
-  trigger.js
-}
-
 class LicenseFilter < Rake::Pipeline::Filter
   def license
     @license ||= begin
@@ -46,8 +35,8 @@ output "dist"
 input "lib" do
   filter \
     Rake::Pipeline::OrderingConcatFilter,
-    distfiles,
-    "ember-pusher#{production ? '.min' : ''}.js"
-  filter UglifyFilter if production
+    EmberPusher::BUILD_ORDER,
+    "ember-pusher#{EmberPusher.production? ? '.min' : ''}.js"
+  filter UglifyFilter if EmberPusher.production?
   filter LicenseFilter
 end
