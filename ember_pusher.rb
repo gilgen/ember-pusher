@@ -1,20 +1,21 @@
 class EmberPusher
 
-  PACKAGE = JSON.parse(File.read(
-    File.join(File.dirname(__FILE__), 'package.json')
+  BUILD_INFO = JSON.parse(File.read(
+    File.join(File.dirname(__FILE__), 'build.json')
   ))
 
-  def self.package(key)
-    PACKAGE[key.to_s]
+  @environment = ENV['BUILD_ENV']
+
+  def self.build_info(key)
+    BUILD_INFO[key.to_s]
   end
 
   def self.production?
-    ENV['BUILD_ENV'] == 'production'
+    @environment == 'production'
   end
 
   def self.development?
-    return true unless ENV['BUILD_ENV']
-    ENV['BUILD_ENV'] == 'development'
+    !@environment || @environment == 'development'
   end
 
 end
