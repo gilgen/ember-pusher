@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/emberjs/docs-generator.git
-  revision: cfbc2a3aabc08de305224b290ad8f37f3ef5f847
-  specs:
-    ember-docs (0.1)
-      rack
-      thor
-
-GIT
   remote: https://github.com/livingsocial/rake-pipeline.git
   revision: 65b1e744defa208e313703d89f3453447cc103b2
   specs:
@@ -41,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ember-docs!
+  json
   rack-rewrite (~> 1.2.1)
   rake-pipeline!
   rake-pipeline-web-filters!

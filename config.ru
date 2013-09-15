@@ -1,9 +1,10 @@
-require File.join(File.dirname(__FILE__), 'ember_pusher')
 require 'bundler/setup'
 require 'rake-pipeline'
 require 'rake-pipeline/middleware'
 require 'rack/rewrite'
 require 'uglifier'
+require 'json'
+require File.join(File.dirname(__FILE__), 'ember_pusher')
 
 
 use Rack::Rewrite do

@@ -1,0 +1,10 @@
+{
+  "build_order": [
+    "namespace.js",
+    "initializer.js",
+    "route.js",
+    "controller.js",
+    "listener.js",
+    "trigger.js"
+  ]
+}

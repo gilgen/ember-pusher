@@ -1,13 +1,12 @@
 class EmberPusher
 
-  BUILD_ORDER = %w{
-    namespace.js
-    initializer.js
-    route.js
-    controller.js
-    listener.js
-    trigger.js
-  }
+  PACKAGE = JSON.parse(File.read(
+    File.join(File.dirname(__FILE__), 'package.json')
+  ))
+
+  def self.package(key)
+    PACKAGE[key.to_s]
+  end
 
   def self.production?
     ENV['BUILD_ENV'] == 'production'

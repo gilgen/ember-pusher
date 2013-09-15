@@ -35,7 +35,7 @@ output "dist"
 input "lib" do
   filter \
     Rake::Pipeline::OrderingConcatFilter,
-    EmberPusher::BUILD_ORDER,
+    EmberPusher.package(:build_order),
     "ember-pusher#{EmberPusher.production? ? '.min' : ''}.js"
   filter UglifyFilter if EmberPusher.production?
   filter LicenseFilter
