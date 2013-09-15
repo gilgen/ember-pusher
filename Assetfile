@@ -1,0 +1,31 @@
+class LicenseFilter < Rake::Pipeline::Filter
+  def license
+    @license ||= begin
+      content = ""
+      File.read("LICENSE").each_line do |line|
+        content += "// #{line}".strip + "\n"
+      end
+      content
+    end
+  end
+
+  def version
+    @version ||= File.read("VERSION")
+  end
+
+  def generate_output(inputs, output)
+    inputs.each do |input|
+      output.write "#{license}"
+      output.write "//\n// Ember Pusher v#{version}\n\n"
+      output.write "#{File.read(input.fullpath)}"
+    end
+  end
+end
+
+input "lib" do
+  output "dist"
+  match "*.js" do
+    concat "ember-pusher.js"
+  end
+  filter LicenseFilter
+end
