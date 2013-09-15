@@ -5,7 +5,7 @@ A library for declaratively managing connections to Pusher channels and events
 in your Ember application.
 
 You are able to connect to different channels and events declaratively as the
-user traverses through your application and the interface to event handlers
+user traverses through your application. The interface to event handlers
 are natural methods on your controllers. In fact: The full event bubbling
 framework is available to the pusher initiated events.
 

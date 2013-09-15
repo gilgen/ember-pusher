@@ -1,6 +1,13 @@
-require 'uglifier'
-
 production = ENV['BUILD_ENV'] == 'production'
+
+distfiles = %w{
+  namespace.js
+  initializer.js
+  route.js
+  controller.js
+  listener.js
+  trigger.js
+}
 
 class LicenseFilter < Rake::Pipeline::Filter
   def license
@@ -37,9 +44,10 @@ end
 output "dist"
 
 input "lib" do
-  match "*.js" do
-    concat "ember-pusher#{production ? '.min' : ''}.js"
-  end
+  filter \
+    Rake::Pipeline::OrderingConcatFilter,
+    distfiles,
+    "ember-pusher#{production ? '.min' : ''}.js"
   filter UglifyFilter if production
   filter LicenseFilter
 end

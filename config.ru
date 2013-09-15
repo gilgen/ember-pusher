@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'rake-pipeline'
 require 'rake-pipeline/middleware'
 require 'rack/rewrite'
+require 'uglifier'
 
 use Rack::Rewrite do
   rewrite '/', '/tests/index.html'
