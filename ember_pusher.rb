@@ -4,7 +4,7 @@ class EmberPusher
     File.join(File.dirname(__FILE__), 'build.json')
   ))
 
-  @environment = ENV['BUILD_ENV']
+  @environment = ENV['BUILD_ENV'] || 'development'
 
   def self.build_info(key)
     BUILD_INFO[key.to_s]
@@ -15,7 +15,7 @@ class EmberPusher
   end
 
   def self.development?
-    !@environment || @environment == 'development'
+    @environment == 'development'
   end
 
 end

@@ -1,9 +1,15 @@
-module("controller");
+var controller;
 
-test( "sanity", function() {
-  equal(1, "1");
-});
+// module("controller", {
+//   setup: function() {
+//     // controller = new EmberPusher.PusherController();
+//   },
+//   teardown: function() {
+//   }
+// });
+// 
+// test("definitions", function() {
+//   ok(EmberPusher.PusherController, "controller defined");
+// });
+//
 
-test( "hello test", function() {
-  ok( 1 == "1", "Passed!" );
-});
