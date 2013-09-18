@@ -1,8 +1,8 @@
 {
   "order": [
-    "initializer.js",
     "controller.js",
     "bindings.js",
+    "initializer.js",
     "trigger.js"
   ]
 }
