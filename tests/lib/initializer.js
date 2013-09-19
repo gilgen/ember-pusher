@@ -1,8 +1,8 @@
-var initializer, container, application, controller;
+var App;
 
 module("initializer", {
   setup: function() {
-    application = Em.Application.create({
+    App = Em.Application.create({
       PUSHER_OPTS: {
         key: '1234321',
         connection: {
@@ -16,9 +16,7 @@ module("initializer", {
   }
 });
 
-// test("initializer sets up pusher", function() {
-//   throws(function() {
-//     Em.Application.create()
-//   }, "throws an exception because PUSHER_OPTS is not defined");
-// });
+test("initializer sets up pusher", function() {
+  ok(App);
+});
 

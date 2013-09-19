@@ -7,7 +7,7 @@ var controller;
 //   teardown: function() {
 //   }
 // });
-// 
+//
 // test("definitions", function() {
 //   ok(EmberPusher.PusherController, "controller defined");
 // });

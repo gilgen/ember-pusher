@@ -1,0 +1,38 @@
+{
+  "name": "ember-pusher",
+  "version": "0.1.0",
+  "description": "An implementation of a declarative interface to Pusher for Ember",
+  "main": "dist/commonjs/main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "jshint": "~0.9",
+    "grunt": "~0.4.1",
+    "grunt-microlib": "git://github.com/thomasboyt/grunt-microlib.git",
+    "promises-aplus-tests": "~1.3.1",
+    "grunt-browserify": "~1.0.2",
+    "grunt-mocha-phantomjs": "~0.3.0",
+    "grunt-mocha-test": "~0.5.0",
+    "grunt-s3": "~0.2.0-alpha.2"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "lint": "jshint lib",
+    "prepublish": "grunt build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jamiebikies/ember-pusher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jamiebikies/ember-pusher.git"
+  },
+  "keywords": [
+    "pusher",
+    "collaboration",
+    "events"
+  ],
+  "author": "Jamie Gilgen",
+  "license": "MIT"
+}

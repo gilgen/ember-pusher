@@ -1,2 +1,2 @@
-module("route");
+module("bindings");
 
