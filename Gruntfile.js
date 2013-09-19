@@ -35,6 +35,5 @@ module.exports = function(grunt) {
   // Load custom tasks from NPM
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
-  grunt.loadNpmTasks('grunt-mocha-test');
 };
 

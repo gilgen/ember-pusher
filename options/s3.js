@@ -1,11 +1,16 @@
 // the base for dist files
 var baseDistFile = 'dist/ember-pusher-<%= pkg.version %>.';
-var builds = ['amd.', ''/* normal ember-pusher.js */ ];
 var s3Uploads = [];
+var builds = [
+  "", // normal ember-pusher.js
+  "amd."
+];
+
 builds.forEach(function(build){
-  var srcFile = baseDistFile + build + 'js';
-  s3Uploads.push({ src: srcFile, dest: 'ember-pusher-<%= env.TRAVIS_COMMIT %>.' + build + 'js' });
-  s3Uploads.push({ src: srcFile, dest: 'ember-pusher-latest.' + build + 'js' });
+  s3Uploads.push({
+    src: baseDistFile + build + 'js',
+    dest: 'ember-pusher.' + build + 'js'
+  });
 });
 
 module.exports = {
