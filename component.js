@@ -1,12 +1,11 @@
 {
   "name": "ember-pusher.js",
-  "description": "An implementation of a declarative interface to Pusher for Ember",
+  "description": "A declarative interface between Pusher and Ember",
   "keywords": [
     "pusher",
-    "collaboration",
-    "events"
+    "ember"
   ],
-  "version": "0.1",
+  "version": "0.1.0",
   "scripts": [
     "main.js",
     "node_modules/ember-pusher/async.js",

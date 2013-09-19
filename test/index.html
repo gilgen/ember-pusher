@@ -3,45 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Ember Pusher</title>
-    <link rel="stylesheet" href="/vendor/css/qunit.css">
-  </head>
-  <body>
-    <div id="qunit"></div>
-    <script src="/vendor/js/qunit.js"></script>
-    <script src="/vendor/js/jquery.js"></script>
-    <script src="/vendor/js/handlebars.js"></script>
-    <script src="/vendor/js/ember.js"></script>
-    <script src="/vendor/js/pusher-test-stub.js"></script>
-
-    <!-- Include ember-pusher.js -->
-    <script src="/dist/ember-pusher.js"></script>
-
-    <!-- actual test cases -->
-    <script src="/tests/lib/controller.js"></script>
-    <script src="/tests/lib/initializer.js"></script>
-    <script src="/tests/lib/bindings.js"></script>
-    <script src="/tests/lib/trigger.js"></script>
-
-  </body>
-</html>
-
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>rsvp.js Tests</title>
-    <link rel="stylesheet" href="vendor/mocha.css" />
+    <link rel="stylesheet" href="vendor/css/mocha.css">
   </head>
   <body>
     <div id="mocha"></div>
-    <script src="../dist/rsvp-2.0.4.js"></script>
-    <script src="vendor/assert.js"></script>
-    <script src="vendor/mocha.js"></script>
-    <script>mocha.setup({ ui: 'bdd', timeout: 200 }); mocha.globals(['setTimeout']);</script>
+    <script src="vendor/js/jquery.js"></script>
+    <script src="vendor/js/handlebars.js"></script>
+    <script src="vendor/js/ember.js"></script>
+    <script src="vendor/js/pusher-test-stub.js"></script>
+    <script src="../dist/ember-pusher-0.1.0.js"></script>
+    <script src="vendor/js/assert.js"></script>
+    <script src="vendor/js/mocha.js"></script>
+    <script>
+       mocha.setup({ ui: 'bdd', timeout: 200 });
+       mocha.globals(['setTimeout']);
+    </script>
     <script src="../tmp/tests-bundle.js"></script>
-    <script src="tests/extension_test.js"></script>
     <script>
       if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
       else { mocha.globals(['setTimeout']); mocha.run(); }
     </script>
   </body>
 </html>
+

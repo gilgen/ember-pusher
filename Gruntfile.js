@@ -5,23 +5,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-s3');
 
   // Custom phantomjs test task
-  this.registerTask('test:phantom', "Runs tests through the command line using PhantomJS", [
-                    'build', 'tests', 'mocha_phantomjs']);
+  this.registerTask(
+    'test:phantom',
+    'Runs tests through the command line using PhantomJS',
+    ['build', 'tests', 'mocha_phantomjs']
+  );
 
   // Custom Node test task
   this.registerTask('test:node', ['build', 'tests', 'mochaTest']);
-
   this.registerTask('test', ['build', 'tests', 'mocha_phantomjs', 'mochaTest']);
 
   var config = {
     cfg: {
-      // Name of the project
       name: 'ember-pusher.js',
-
-      // Name of the root module (i.e. 'rsvp' -> 'lib/rsvp.js')
       barename: 'ember-pusher',
-
-      // Name of the global namespace to export to
       namespace: 'EmberPusher'
     },
     env: process.env,
@@ -34,7 +31,7 @@ module.exports = function(grunt) {
     s3: require('./options/s3'),
   };
 
-  // Merge config into emberConfig, overwriting existing settings
+  // Merge config into emberPusherConfig, overwriting existing settings
   grunt.initConfig(grunt.util._.merge(emberPusherConfig, config));
 
   // Load custom tasks from NPM
@@ -42,3 +39,4 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   grunt.loadNpmTasks('grunt-mocha-test');
 };
+

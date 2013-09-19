@@ -1,16 +1,16 @@
 // the base for dist files
-var baseDistFile = 'dist/rsvp-<%= pkg.version %>.';
-var builds = ['amd.', '' /* normal rsvp.js */ ];
+var baseDistFile = 'dist/ember-pusher-<%= pkg.version %>.';
+var builds = ['amd.', ''/* normal ember-pusher.js */ ];
 var s3Uploads = [];
 builds.forEach(function(build){
   var srcFile = baseDistFile + build + 'js';
-  s3Uploads.push({ src: srcFile, dest: 'rsvp-<%= env.TRAVIS_COMMIT %>.' + build + 'js' });
-  s3Uploads.push({ src: srcFile, dest: 'rsvp-latest.' + build + 'js' });
+  s3Uploads.push({ src: srcFile, dest: 'ember-pusher-<%= env.TRAVIS_COMMIT %>.' + build + 'js' });
+  s3Uploads.push({ src: srcFile, dest: 'ember-pusher-latest.' + build + 'js' });
 });
 
 module.exports = {
   options: {
-    bucket: 'rsvpjs-builds',
+    bucket: 'ember-pusher-builds',
     access: 'public-read'
   },
   dev: {

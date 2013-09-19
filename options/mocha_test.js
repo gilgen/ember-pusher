@@ -1,13 +1,17 @@
 module.exports = {
   test: {
     src: [
-      'test/vendor/assert.js',
-      'test/test-adapter.js',
-      'node_modules/promises-aplus-tests/lib/tests/**/*.js',
-      'tmp/tests.cjs.js'
+      'test/vendor/js/jquery.js',
+      'test/vendor/js/handlebars.js',
+      'test/vendor/js/ember.js',
+      'test/vendor/js/pusher.js',
+      'test/vendor/js/pusher-test-stub.js',
+      'test/vendor/js/assert.js',
+      // 'tmp/tests.cjs.js'
     ],
     options: {
       reporter: 'spec'
     }
   }
 };
+

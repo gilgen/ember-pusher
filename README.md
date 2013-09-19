@@ -1,5 +1,4 @@
-Ember Pusher
-============
+# Ember Pusher
 
 A library for declaratively managing connections to Pusher channels and events
 in your Ember application.
@@ -13,16 +12,20 @@ framework is available to the pusher initiated events.
 
 Yes
 
+
 ## Is it production ready?
 
 No
 
-# Running the tests
-`bundle exec rackup` and visit `http://localhost:9292`
 
-# Building
-If you want to create a production build, you can just run things like:
+## Running the tests
+`grunt test` - Runs Mocha tests through Node and PhantomJS
 
-`BUILD_ENV=production bundle exec rackup` and then hit the test suite which
-generates a dist/ember-pusher.min.js
+`grunt test:phantom` - Run Mocha tests through PhantomJS (browser build)
 
+`grunt test:node` - Run tests through Node (CommonJS build)
+
+
+## Building
+
+`grunt build` - build 'er
