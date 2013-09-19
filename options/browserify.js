@@ -1,6 +1,9 @@
 module.exports = {
   tests: {
-    src: ['test/vendor/ember.js', 'test/lib/*'],
+    src: [
+      'test/test-adapter.js',
+      'test/lib/*'
+    ],
     dest: 'tmp/tests-bundle.js'
   }
 };

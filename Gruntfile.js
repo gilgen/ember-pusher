@@ -12,8 +12,7 @@ module.exports = function(grunt) {
   );
 
   // Custom Node test task
-  this.registerTask('test:node', ['build', 'tests', 'mochaTest']);
-  this.registerTask('test', ['build', 'tests', 'mocha_phantomjs', 'mochaTest']);
+  this.registerTask('test', ['build', 'tests', 'mocha_phantomjs']);
 
   var config = {
     cfg: {
@@ -25,7 +24,6 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    mochaTest: require('./options/mocha_test.js'),
     browserify: require('./options/browserify.js'),
     mocha_phantomjs: require('./options/mocha_phantom.js'),
     s3: require('./options/s3'),
