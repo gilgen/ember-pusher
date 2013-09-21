@@ -3,7 +3,8 @@ var baseDistFile = 'dist/ember-pusher-<%= pkg.version %>.';
 var s3Uploads = [];
 var builds = [
   "", // normal ember-pusher.js
-  "amd."
+  "amd.",
+  "min."
 ];
 
 builds.forEach(function(build){
