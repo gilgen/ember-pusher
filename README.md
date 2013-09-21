@@ -20,9 +20,10 @@ No
 
 ### Download
 
-- [ember-pusher](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
-- [ember-pusher (minified)](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.min.js)
-- [ember-pusher (amd)](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
+- [ember-pusher.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
+- [ember-pusher.min.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.min.js)
+- [ember-pusher.amd.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
+
 
 
 ### Running the tests
