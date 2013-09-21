@@ -12,7 +12,6 @@
     "grunt-microlib": "git://github.com/thomasboyt/grunt-microlib.git",
     "grunt-browserify": "~1.0.2",
     "grunt-mocha-phantomjs": "~0.3.0",
-    "grunt-mocha-test": "~0.5.0",
     "grunt-s3": "~0.2.0-alpha.2"
   },
   "scripts": {
