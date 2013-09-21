@@ -1,8 +1,7 @@
-// the base for dist files
 var baseDistFile = 'dist/ember-pusher-<%= pkg.version %>.';
 var s3Uploads = [];
 var builds = [
-  "", // normal ember-pusher.js
+  "",
   "amd.",
   "min."
 ];
