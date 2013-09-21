@@ -3,11 +3,13 @@ var App, targetController, pusherController, channelName, bindings;
 Ember.FakeController = Em.Controller.extend(Em.PusherBindings, {
   PUSHER_SUBSCRIPTIONS: {
     craycraychannel: ['event-one', 'event-two']
-  }
+  },
+  eventOne: function(){ return "event-one-fired"; },
+  eventTwo: function(){ return "event-two-fired"; }
 });
 
 Ember.Application.initializer({
-  name: "createFakeController",
+  name: "registerFakeController",
   initialize: function(container, application) {
     container.register('controller:fake', Ember.FakeController);
     targetController = container.lookup('controller:fake');
@@ -29,6 +31,7 @@ describe("Controller", function() {
   describe("sanity", function(){
     it("exists", function() {
       assert.ok(Ember.PusherController, "Ember.PusherController exists");
+      assert.ok(pusherController.get('connection'), "pusher connection initialized");
     });
 
     it("initializes the bindings object properly", function() {
@@ -43,6 +46,13 @@ describe("Controller", function() {
     it("initializes eventBindings in the bindings hash", function() {
       var targetId = targetController._pusherEventsId();
       assert.ok(bindings[channelName].eventBindings[targetId].length == 2, "Knows about two bound events");
+    });
+  });
+
+  describe("channelFor", function() {
+    it("returns a channel object", function() {
+      var channel = pusherController.channelFor(channelName);
+      assert.ok(channel, "channel defined");
     });
   });
 
