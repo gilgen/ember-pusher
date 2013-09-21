@@ -20,8 +20,9 @@ No
 
 ### Download
 
-- [ember-pusher-latest](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher-latest.js)
-- [ember-pusher-latest (amd)](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher-latest.amd.js)
+- [ember-pusher](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
+- [ember-pusher (amd)](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
+
 
 ### Running the tests
 `grunt test` - Runs Mocha tests through PhantomJS
@@ -29,3 +30,4 @@ No
 ### Building
 
 `grunt build` - build 'er
+
