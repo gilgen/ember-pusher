@@ -24,12 +24,7 @@ No
 - [ember-pusher-latest (amd)](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher-latest.amd.js)
 
 ### Running the tests
-`grunt test` - Runs Mocha tests through Node and PhantomJS
-
-`grunt test:phantom` - Run Mocha tests through PhantomJS (browser build)
-
-`grunt test:node` - Run tests through Node (CommonJS build)
-
+`grunt test` - Runs Mocha tests through PhantomJS
 
 ### Building
 
