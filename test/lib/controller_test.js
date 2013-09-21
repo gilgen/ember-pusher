@@ -1,6 +1,6 @@
 var App, targetController, pusherController, channelName, bindings;
 
-Ember.FakeController = Em.Controller.extend(Em.PusherBindings, {
+var FakeController = Em.Controller.extend(EmberPusher.Bindings, {
   PUSHER_SUBSCRIPTIONS: {
     craycraychannel: ['event-one', 'event-two']
   },
@@ -11,7 +11,7 @@ Ember.FakeController = Em.Controller.extend(Em.PusherBindings, {
 Ember.Application.initializer({
   name: "registerFakeController",
   initialize: function(container, application) {
-    container.register('controller:fake', Ember.FakeController);
+    container.register('controller:fake', FakeController);
     targetController = container.lookup('controller:fake');
   }
 });
@@ -30,7 +30,7 @@ describe("Controller", function() {
 
   describe("sanity", function(){
     it("exists", function() {
-      assert.ok(Ember.PusherController, "Ember.PusherController exists");
+      assert.ok(EmberPusher.Controller, "Ember.PusherController exists");
       assert.ok(pusherController.get('connection'), "pusher connection initialized");
     });
 
