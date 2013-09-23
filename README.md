@@ -1,4 +1,4 @@
-Ember Pusher
+Ember Pusher [![Build Status](https://travis-ci.org/jamiebikies/ember-pusher.png?branch=master)](https://travis-ci.org/jamiebikies/ember-pusher)
 -------------------
 A library for declaratively managing connections to Pusher channels and events
 in your Ember application.
