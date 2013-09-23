@@ -1,17 +1,10 @@
----
 language: node_js
 node_js:
 - '0.10'
 before_install:
 - npm install -g grunt-cli
-# after_success: grunt build s3:dev
-# env:
-#   global:
-#   - secure: |-
-#       d59CLXVX6GiFNo9z2vzCt/l/3p2/RjvjgYvrE3Tx7Ose6H7BBOuV6fSGOQ2n
-#       MK4RHcA+2TIhNshldeX6ZCXNaRIMY3dixfJBF7eb2N7wDBj2hA17oxvE0MzE
-#       rOWXzvAmxA53/xvr4bShoCbsa06WDGScEkcdJRCnFG+ReAyG/WU=
-#   - secure: |-
-#       mrNGoG5AycW+d5jlghF9PJHQW1ETT9jWI7bGe9QX1QRpoSLkGAvxavrujmhu
-#       UNRP/pe5AJBh3zDED38nD/ZGtrcSYQ5CC6QbFLx5mLtqn7mNTo1m3C5lr+55
-#       Sb6mnyLLz2eoPBUMcXwY1i9Qisy40uhfV9VuD5B/gvVud2+oJWI=
+after_success: grunt build s3
+env:
+  global:
+  - secure: lHZs5OSYzk78hQmSr2KrsFQl+J/Zrt/MUDd0dqiCPmoIdU5855Kn0OguztG5GM+0fIdSfbDxKNv0ZgtdULStvtyrRmFLGbKSvK/VLpUrsGpSoAN0b0t35FpHAQVKnPUB9yWm2+Vy3O6Bt8Et0lfrvuhh5k6w2rmtDwItcqsQcdE=
+  - secure: qVNohfq19RIk+Ay427U9UEWtoloqeCLkj4wbFmG7VSV6KitzX+zvP36VmhxfXPnJhXua0Lh1Df75g916x9De9y4Q79gP1ImC/2udx0GJz5oiyEERHzsD480adTG0nWC2YOW+KliAAEl4aLTtT4RAu8b2MPq7Z6MgBXbAOZ4+ykU=
