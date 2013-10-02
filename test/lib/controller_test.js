@@ -43,6 +43,7 @@ describe("Controller", function() {
     it("initializes channelName in the bindings hash", function() {
       assert.ok(pusherController.get('bindings')[channelName], "Creates a channel name");
     });
+
     it("initializes eventBindings in the bindings hash", function() {
       var targetId = targetController._pusherEventsId();
       assert.ok(bindings[channelName].eventBindings[targetId].length == 2, "Knows about two bound events");
