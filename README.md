@@ -91,6 +91,11 @@ have implemented on your controller. Did you make sure to extend
 Yes.
 
 
+![question](https://snappys.s3.amazonaws.com/question2.jpg) __What versions of Ember are supported!?__
+
+~>1.0.0
+
+
 ![question](https://snappys.s3.amazonaws.com/question3.jpg) __Can I bind to connection events!?__
 
 Indeed! I do this in my apps to attach the pusher socket ID as a

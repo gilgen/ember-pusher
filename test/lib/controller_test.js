@@ -24,6 +24,7 @@ describe("Controller", function() {
 
   before(function(){
     pusherController = App.__container__.lookup('controller:pusher');
+    pusherController.get('connection').connection.socket_id = '1234';
     channelName = 'craycraychannel';
     bindings = pusherController.get('bindings');
   });
@@ -31,7 +32,7 @@ describe("Controller", function() {
   describe("sanity", function(){
     it("exists", function() {
       assert.ok(EmberPusher.Controller, "Ember.PusherController exists");
-      assert.ok(pusherController.get('connection'), "pusher connection initialized");
+      assert.ok(pusherController.get('connection'), "pusher initialized");
     });
 
     it("initializes the bindings object properly", function() {
@@ -47,6 +48,12 @@ describe("Controller", function() {
     it("initializes eventBindings in the bindings hash", function() {
       var targetId = targetController._pusherEventsId();
       assert.ok(bindings[channelName].eventBindings[targetId].length == 2, "Knows about two bound events");
+    });
+  });
+
+  describe("socketId", function() {
+    it("sets a socket ID", function() {
+      assert.ok(pusherController.get('socketId'), "Socket ID defined");
     });
   });
 
