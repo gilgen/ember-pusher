@@ -1,5 +1,5 @@
-Ember Pusher [![Build Status](https://travis-ci.org/jamiebikies/ember-pusher.png?branch=master)](https://travis-ci.org/jamiebikies/ember-pusher)
--------------------
+# Ember Pusher [![Build Status](https://travis-ci.org/jamiebikies/ember-pusher.png?branch=master)](https://travis-ci.org/jamiebikies/ember-pusher)
+
 A library for declaratively managing connections to Pusher channels and events
 in your Ember application.
 
@@ -8,11 +8,19 @@ user traverses through your application. The interface to event handlers
 are natural methods on your controllers. In fact: The full event bubbling
 framework is available to the pusher initiated events.
 
+
+### Download
+- [ember-pusher.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
+- [ember-pusher.min.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.min.js)
+- [ember-pusher.amd.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
+
+
 ### Is it good?
 Yes
 
 ### Is it production ready?
 I guess? Ship it!
+
 
 ### How do I use this thing?
 Good question!
@@ -32,7 +40,7 @@ App = Ember.Application.create({
 
 Next, for any controllers that you want to catch pusher events on:
 
-1. Extend `EmberPusher.Bindings`
+1. Extend `EmberPusher.Bindings`.
 2. Define `PUSHER_SUBSCRIPTIONS` where the keys are channel names and the
    values are arrays of events for the channel. If you have dynamic channel
    names or events, you can totally just construct your `PUSHER_SUBSCRIPTIONS`
@@ -102,11 +110,6 @@ actions: {
 }
 ```
 
-
-### Download
-- [ember-pusher.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
-- [ember-pusher.min.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.min.js)
-- [ember-pusher.amd.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
 
 ### Running the tests
 `grunt test` - Runs Mocha tests through PhantomJS
