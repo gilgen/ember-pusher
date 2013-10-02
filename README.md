@@ -97,17 +97,19 @@ Indeed! I do this in my apps to attach the pusher socket ID as a
 header to xhr requests. It would look like this:
 
 ```javascript
-PUSHER_SUBSCRIPTIONS: {
-  my-channel: ['pusher:subscription_succeeded']
-}
+App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
+  needs: ['pusher'],
 
-...
+  PUSHER_SUBSCRIPTIONS: {
+    my-channel: ['pusher:subscription_succeeded']
+  },
 
-actions: {
-  'pusher:subscriptionSucceeded': function() {
-    console.log("yay!");
+  actions: {
+    'pusher:subscriptionSucceeded': function() {
+      console.log("Socket ID:", @get('controllers.pusher.socketId'));
+    }
   }
-}
+})
 ```
 
 
