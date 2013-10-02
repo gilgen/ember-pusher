@@ -106,10 +106,10 @@ App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
 
   actions: {
     'pusher:subscriptionSucceeded': function() {
-      console.log("Socket ID:", @get('controllers.pusher.socketId'));
+      console.log("Socket ID:", this.get('controllers.pusher.socketId'));
     }
   }
-})
+});
 ```
 
 
