@@ -78,7 +78,7 @@ your handlers wherever suits your needs best.
 Have fun! Certainly let me know if you see any bugs.
 
 ### FAQ
-![question](https://snappys.s3.amazonaws.com/question2.jpg) __My event's aren't firing! :'(__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My event's aren't firing! :'(__
 
 Are you sure you've got the right event name on your controller? Do
 an `Em.String.camelize('foo-bar')` on your event name. That's what you should
@@ -86,20 +86,19 @@ have implemented on your controller. Did you make sure to extend
 `EmberPusher.Bindings` on the controller(s) you want to catch events on?
 
 
-![question](https://snappys.s3.amazonaws.com/question1.jpg) __Can I connect to a private channel!?__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question1.jpg) __Can I connect to a private channel!?__
 
 Yes.
 
 
-![question](https://snappys.s3.amazonaws.com/question2.jpg) __What versions of Ember are supported!?__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question4.jpg) __What versions of Ember are supported!?__
 
 ~>1.0.0
 
 
-![question](https://snappys.s3.amazonaws.com/question3.jpg) __Can I bind to connection events!?__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question3.jpg) __Can I bind to channel connection events!?__
 
-Indeed! I do this in my apps to attach the pusher socket ID as a
-header to xhr requests. It would look like this:
+Indeed.
 
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
@@ -111,11 +110,31 @@ App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
 
   actions: {
     'pusher:subscriptionSucceeded': function() {
-      console.log("Socket ID:", this.get('controllers.pusher.socketId'));
+      console.log("Connected!");
     }
   }
 });
 ```
+
+![question](https://ember-pusher-builds.s3.amazonaws.com/question5.jpg) __What can I bind to for the connection status and socket id!?__
+
+You could bind to `isConnected` and `socketId` which are both on the pusherController.
+
+```javascript
+App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
+  needs: ['pusher'],
+  pusher: Ember.computed.oneWay('controllers.pusher'),
+
+  socketIdChanged: function() {
+    console.log("Socket ID changed", this.get('pusher.socketId'));
+  }.observes('pusher.socketId').on('init'),
+
+  pusherConnectionStatusChanged: function() {
+    console.log("Connection status changed", this.get('pusher.isConnected'));
+  }.observes('pusher.isConnected').on('init')
+});
+```
+
 
 
 ### Running the tests
