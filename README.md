@@ -19,7 +19,7 @@ framework is available to the pusher initiated events.
 Yes
 
 ### Is it production ready?
-I guess? Ship it!
+I guess? Ship it! :shipit:
 
 
 ### How do I use this thing?
