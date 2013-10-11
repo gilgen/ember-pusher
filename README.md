@@ -123,7 +123,7 @@ You could bind to `isConnected` and `socketId` which are both on the pusherContr
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
   needs: ['pusher'],
-  pusher: Ember.computed.oneWay('controllers.pusher'),
+  pusher: Ember.computed.alias('controllers.pusher'),
 
   socketIdChanged: function() {
     console.log("Socket ID changed", this.get('pusher.socketId'));
