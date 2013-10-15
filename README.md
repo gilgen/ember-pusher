@@ -78,7 +78,7 @@ your handlers wherever suits your needs best.
 Have fun! Certainly let me know if you see any bugs.
 
 ### FAQ
-![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My event's aren't firing! :'(__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My events aren't firing! :'(__
 
 Are you sure you've got the right event name on your controller? Do
 an `Em.String.camelize('foo-bar')` on your event name. That's what you should
