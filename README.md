@@ -19,7 +19,7 @@ framework is available to the pusher initiated events.
 Yes
 
 ### Is it production ready?
-I guess? Ship it!
+I guess? Ship it! :shipit:
 
 
 ### How do I use this thing?
@@ -78,7 +78,7 @@ your handlers wherever suits your needs best.
 Have fun! Certainly let me know if you see any bugs.
 
 ### FAQ
-![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My event's aren't firing! :'(__
+![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My events aren't firing! :'(__
 
 Are you sure you've got the right event name on your controller? Do
 an `Em.String.camelize('foo-bar')` on your event name. That's what you should
@@ -123,7 +123,7 @@ You could bind to `isConnected` and `socketId` which are both on the pusherContr
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
   needs: ['pusher'],
-  pusher: Ember.computed.oneWay('controllers.pusher'),
+  pusher: Ember.computed.alias('controllers.pusher'),
 
   socketIdChanged: function() {
     console.log("Socket ID changed", this.get('pusher.socketId'));
