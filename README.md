@@ -147,4 +147,4 @@ App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
 `grunt build` - build 'er
 
 ### Contributors
-[@wycats](https://github.com/wycats) - Architectural advise.
+[@wycats](https://github.com/wycats) - Architectural advice.
