@@ -77,6 +77,29 @@ your handlers wherever suits your needs best.
 
 Have fun! Certainly let me know if you see any bugs.
 
+
+### Client Events
+
+In order to send events from the client you will need to [enable client events](http://pusher.com/docs/client_api_guide/client_events#trigger-events)
+for your Pusher application. In your Ember controllers you must mixin
+`EmberPusher.ClientEvents` and call the `pusherTrigger` method.
+
+##### Example Controller:
+
+```javascript
+var YourController = Em.Controller.extend(EmberPusher.ClientEvents, {
+  actions: {
+    sendSomeEvent: function() {
+      // Pusher requires that the event be prefixed with 'client-'
+      var eventName = 'client-some-event';
+      this.pusherTrigger(this.get('channelName'), eventName, this.get('data'));
+    }
+  }
+});
+```
+
+
+
 ### FAQ
 ![question](https://ember-pusher-builds.s3.amazonaws.com/question2.jpg) __My events aren't firing! :'(__
 
