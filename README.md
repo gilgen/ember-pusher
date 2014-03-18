@@ -71,6 +71,8 @@ var YourController = Em.Controller.extend(EmberPusher.Bindings, {
 });
 ```
 
+Note: Things work as expected if you set either of these options at runtime
+
 ##### Example Controller:
 
 ```javascript
