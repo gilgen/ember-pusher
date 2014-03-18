@@ -47,6 +47,30 @@ Next, for any controllers that you want to catch pusher events on:
    hash in `init()` of your controller. Private channels are fine.
 3. Implement your event handlers on the controller.
 
+
+##### Logging
+There are two ways to setup logging. The first is to log all events which
+can be accomplished by setting `logAllEvents` in your `PUSHER_OPTS` hash:
+
+
+```javascript
+App = Ember.Application.create({
+  PUSHER_OPTS: { key: 'foo', connection: { ... }, logAllEvents: true }
+});
+```
+
+The second method of logging, is to set `logPusherEvents` on the controllers
+that you're binding. For example:
+
+```javascript
+var YourController = Em.Controller.extend(EmberPusher.Bindings, {
+  logPusherEvents: true,
+  PUSHER_SUBSCRIPTIONS: {
+    myChannel: ['my-event']
+  }
+});
+```
+
 ##### Example Controller:
 
 ```javascript
@@ -63,8 +87,6 @@ var YourController = Em.Controller.extend(EmberPusher.Bindings, {
 });
 ```
 
-
-
 **Note**: The event names have `camelize()` called on them, so that you can
 keep your controller's methods looking consistent. Event handlers are tracked
 and torn down when a controller is destroyed.
@@ -76,7 +98,6 @@ your handlers wherever suits your needs best.
 
 
 Have fun! Certainly let me know if you see any bugs.
-
 
 ### Client Events
 
