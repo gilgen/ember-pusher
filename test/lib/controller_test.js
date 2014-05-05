@@ -23,7 +23,7 @@ App = Ember.Application.create({
 describe("Controller", function() {
 
   before(function(){
-    pusherController = App.__container__.lookup('controller:pusher');
+    pusherController = App.__container__.lookup('pusher:main');
     pusherController.get('connection').connection.socket_id = '1234';
     channelName = 'craycraychannel';
     bindings = pusherController.get('bindings');

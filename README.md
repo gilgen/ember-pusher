@@ -148,8 +148,6 @@ Indeed.
 
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
-  needs: ['pusher'],
-
   PUSHER_SUBSCRIPTIONS: {
     my-channel: ['pusher:subscription_succeeded']
   },
@@ -168,15 +166,12 @@ You could bind to `isConnected` and `socketId` which are both on the pusherContr
 
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
-  needs: ['pusher'],
-  pusher: Ember.computed.alias('controllers.pusher'),
-
   socketIdChanged: function() {
-    console.log("Socket ID changed", this.get('pusher.socketId'));
+    console.log("Socket ID changed", this.pusher.get('socketId'));
   }.observes('pusher.socketId').on('init'),
 
   pusherConnectionStatusChanged: function() {
-    console.log("Connection status changed", this.get('pusher.isConnected'));
+    console.log("Connection status changed", this.pusher.get('isConnected'));
   }.observes('pusher.isConnected').on('init')
 });
 ```
