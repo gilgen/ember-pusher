@@ -44,7 +44,7 @@ Next, for any controllers that you want to catch pusher events on:
 2. Define `PUSHER_SUBSCRIPTIONS` where the keys are channel names and the
    values are arrays of events for the channel. If you have dynamic channel
    names or events, you can totally just construct your `PUSHER_SUBSCRIPTIONS`
-   hash in `init()` of your controller. Private channels are fine.
+   hash in `init()` of your controller (note: be sure to call ```this._super()``` afterwards). Private channels are fine.
 3. Implement your event handlers on the controller.
 
 
@@ -83,7 +83,7 @@ var YourController = Em.Controller.extend(EmberPusher.Bindings, {
   },
   actions: {
     eventOne: function(){ console.log("eventOne is working!"); },
-    eventTwo: function(){ console.log("eventTwo is working!"); }
+    eventTwo: function(){ console.log("eventTwo is working!"); },
     eventThree: function(){ console.log("eventThree is working!"); }
   }
 });
