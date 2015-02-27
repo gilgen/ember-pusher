@@ -1,26 +1,25 @@
-var App, targetController, pusherController, channelName, bindings;
-
-var FakeController = Em.Controller.extend(EmberPusher.Bindings, {
-  PUSHER_SUBSCRIPTIONS: {
-    craycraychannel: ['event-one', 'event-two']
-  },
-  eventOne: function(){ return "event-one-fired"; },
-  eventTwo: function(){ return "event-two-fired"; }
-});
-
-Ember.Application.initializer({
-  name: "registerFakeController",
-  initialize: function(container, application) {
-    container.register('controller:fake', FakeController);
-    targetController = container.lookup('controller:fake');
-  }
-});
-
-App = Ember.Application.create({
-  PUSHER_OPTS: { key: 'foo' }
-});
-
 describe("Controller", function() {
+  var App, targetController, pusherController, channelName, bindings;
+
+  var FakeController = Em.Controller.extend(EmberPusher.Bindings, {
+    PUSHER_SUBSCRIPTIONS: {
+      craycraychannel: ['event-one', 'event-two']
+    },
+    eventOne: function(){ return "event-one-fired"; },
+    eventTwo: function(){ return "event-two-fired"; }
+  });
+
+  Ember.Application.initializer({
+    name: "registerFakeController",
+    initialize: function(container, application) {
+      container.register('controller:fake', FakeController);
+      targetController = container.lookup('controller:fake');
+    }
+  });
+
+  App = Ember.Application.create({
+    PUSHER_OPTS: { key: 'foo' }
+  });
 
   before(function(){
     pusherController = App.__container__.lookup('pusher:main');
