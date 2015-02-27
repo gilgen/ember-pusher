@@ -93,6 +93,28 @@ var YourController = Em.Controller.extend(EmberPusher.Bindings, {
 keep your controller's methods looking consistent. Event handlers are tracked
 and torn down when a controller is destroyed.
 
+### Channels with Dashes
+
+In some cases, Pusher requires a channel name that includes a dash – for example in `presence-`
+or `private-` channels. Due to ember-cli being very strict with JavaScript syntax, it is not
+possible to use a dash in the channel names when configuring your `PUSHER_SUBSCRIPTIONS`.
+
+To get around this, we allow the `PUSHER_OPTS` option of `dasherizeChannel`. When set to true,
+the channel name in `PUSHER_SUBSCRIPTIONS` is dasherized. For instance, this is how you would build
+a simple presence controller.
+
+```javascript
+PUSHER_OPTS: { key: 'foo', dasherizeChannel: true }
+
+...
+var YourController = Em.Controller.extend(EmberPusher.Bindings, {
+  PUSHER_SUBSCRIPTIONS: {
+    presenceMessages: ['member_added'],
+  },
+});
+```
+
+
 
 That's about it! When events come in, they should be triggered on the listening controllers.
 It should be noted that event bubbling will all work as expected, so you can actually implement
@@ -149,7 +171,7 @@ Indeed.
 ```javascript
 App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
   PUSHER_SUBSCRIPTIONS: {
-    my-channel: ['pusher:subscription_succeeded']
+    myChannel: ['pusher:subscription_succeeded']
   },
 
   actions: {
