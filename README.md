@@ -136,6 +136,8 @@ have implemented on your controller. Did you make sure to extend
 
 Yes.
 
+`PUSHER_SUBSCRIPTIONS: { 'private-user.3' : ['cuckoo'] }`
+
 
 ![question](https://ember-pusher-builds.s3.amazonaws.com/question4.jpg) __What versions of Ember are supported!?__
 
