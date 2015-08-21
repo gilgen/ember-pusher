@@ -47,19 +47,24 @@ export default Ember.Service.extend({
   isConnected: Ember.computed.not('isDisconnected'),
 
   init() {
+    this.token = null;
     this.pusher = null;
     this.set('bindings', {});
     this.logEvents = false;
   },
 
-  setup(applicationKey, options) {
+  setup(applicationKey, pusherOptions, emberPusherOptions) {
     Ember.assert("ember-pusher can only be setup once", !this.pusher);
     Ember.assert("You need to include the pusher libraries", !!window.Pusher);
 
-    this.pusher = new window.Pusher(applicationKey, options);
+    this.pusher = new window.Pusher(applicationKey, pusherOptions);
     this.pusher.connection.bind('connected', this._didConnect.bind(this));
     this.pusher.connection.bind('disconnected', this._didDisconnect.bind(this));
     this.pusher.connection.bind('unavailable', this._didDisconnect.bind(this));
+
+    if (emberPusherOptions) {
+      this.token = emberPusherOptions.token || null;
+    }
   },
 
   willDestroy() {
@@ -89,11 +94,17 @@ export default Ember.Service.extend({
       let events = bindings[channelName].eventBindings[targetId];
       let found;
       let handler = function(data) {
+        if (this.token && this.token !== data.__ember_pusher_token__) {
+          // This event was not meant for this application instance.
+          return;
+        }
         if (target.get('logPusherEvents')) {
           console.log(target.constructor.toString() +
             ": Pusher event received", eventName, data);
         }
-        target.send(normalizedEventName, data);
+        Ember.run(() => {
+          target.send(normalizedEventName, data);
+        });
       };
 
       channel.bind(eventName, handler);
