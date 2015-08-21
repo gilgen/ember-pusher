@@ -4,6 +4,8 @@
     "window",
     "location",
     "setTimeout",
+    "setInterval",
+    "clearInterval",
     "$",
     "-Promise",
     "define",

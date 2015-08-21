@@ -93,7 +93,9 @@ export default Ember.Service.extend({
           console.log(target.constructor.toString() +
             ": Pusher event received", eventName, data);
         }
-        target.send(normalizedEventName, data);
+        Ember.run(() => {
+          target.send(normalizedEventName, data);
+        });
       };
 
       channel.bind(eventName, handler);
