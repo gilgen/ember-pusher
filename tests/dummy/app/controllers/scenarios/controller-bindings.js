@@ -3,6 +3,7 @@ import EmberPusher from 'ember-pusher';
 import { trigger } from '../../tests/helpers/pusher';
 
 export default Ember.Controller.extend(EmberPusher.Bindings, {
+
   PUSHER_SUBSCRIPTIONS: {
     "controller-bindings": ['new-message']
   },
@@ -11,7 +12,9 @@ export default Ember.Controller.extend(EmberPusher.Bindings, {
 
   actions: {
     sendMessage(message) {
-      trigger('controller-bindings', 'new-message', { message: message });
+      trigger('controller-bindings', 'new-message', {
+        message: message
+      });
     },
 
     newMessage(data) {

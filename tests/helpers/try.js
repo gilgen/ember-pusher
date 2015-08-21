@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export function tryRepeatedly(assert, callback, options={}) {
-  let timeout = options.timeout || 2500;
+  let timeout = options.timeout || 10000;
   let rate = options.rate || 200;
 
   return new Ember.RSVP.Promise(resolve => {
