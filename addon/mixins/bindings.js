@@ -1,9 +1,10 @@
 import Ember from 'ember';
+import { keys } from 'ember-pusher/compat';
 
 export default Ember.Mixin.create({
   init() {
     if (this.PUSHER_SUBSCRIPTIONS) {
-      Object.keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
+      keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
         let events = this.PUSHER_SUBSCRIPTIONS[channelName];
         this.pusher.wire(this, channelName, events);
       });
@@ -14,7 +15,7 @@ export default Ember.Mixin.create({
 
   willDestroy() {
     if (this.PUSHER_SUBSCRIPTIONS) {
-      Object.keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
+      keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
         this.pusher.unwire(this, channelName);
       });
     }
