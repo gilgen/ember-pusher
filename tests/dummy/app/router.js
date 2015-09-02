@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('scenarios', function() {
+    this.route('controller-bindings');
+  });
 });
 
 export default Router;
