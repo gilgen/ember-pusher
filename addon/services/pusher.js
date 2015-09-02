@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { keys } from 'ember-pusher/compat';
 
 // Need to track
 // 1) channel object
@@ -121,7 +122,7 @@ export default Ember.Service.extend({
       bindings[channelName] = { eventBindings: {} };
     }
 
-    if (Ember.isEmpty(Object.keys(bindings[channelName].eventBindings))) {
+    if (Ember.isEmpty(keys(bindings[channelName].eventBindings))) {
       bindings[channelName].channel = pusher.subscribe(channelName);
 
       // Spit out a bunch of logging if asked
@@ -151,7 +152,7 @@ export default Ember.Service.extend({
     delete bindings[channelName].eventBindings[targetId];
 
     // Unsubscribe from the channel if this is the last thing listening
-    if (Object.keys(bindings[channelName].eventBindings).length === 0) {
+    if (keys(bindings[channelName].eventBindings).length === 0) {
       pusher.unsubscribe(channelName);
       delete bindings[channelName];
       return true;
