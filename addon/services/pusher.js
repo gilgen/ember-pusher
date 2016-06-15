@@ -153,11 +153,17 @@ export default Ember.Service.extend({
       eventsToUnwire = [eventsToUnwire];
     }
 
-    // Unbind all the events for this target
-    for (let binding in bindings[channelName].eventBindings[targetId]) {
+    eventBindings.forEach((binding, index) => {
+      if(eventsToUnwire && !eventsToUnwire.contains(binding.eventName)) {
+        return;
+      }
       channel.unbind(binding.eventName, binding.handler);
+      eventBindings.splice(index, 1);
+    });
+
+    if (Ember.isEmpty(eventBindings)) {
+      delete bindings[channelName].eventBindings[targetId];
     }
-    delete bindings[channelName].eventBindings[targetId];
 
     // Unsubscribe from the channel if this is the last thing listening
     if (keys(bindings[channelName].eventBindings).length === 0) {
