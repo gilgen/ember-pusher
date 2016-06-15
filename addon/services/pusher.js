@@ -147,7 +147,8 @@ export default Ember.Service.extend({
     let pusher = this.pusher,
         bindings = this.get('bindings'),
         targetId = target._pusherEventsId(),
-        channel = bindings[channelName].channel;
+        channel = bindings[channelName].channel,
+        eventBindings = bindings[channelName].eventBindings[targetId];
 
     if(typeof eventsToUnwire === 'string') {
       eventsToUnwire = [eventsToUnwire];
