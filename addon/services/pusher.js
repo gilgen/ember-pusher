@@ -79,6 +79,10 @@ export default Ember.Service.extend({
         bindings = this.get('bindings'),
         targetId = target._pusherEventsId();
 
+    if(typeof events === 'string') {
+      events = [events];
+    }
+
     // Setup the eventBindings array for this target
     if (!bindings[channelName].eventBindings[targetId]) {
       bindings[channelName].eventBindings[targetId] = [];
@@ -144,6 +148,10 @@ export default Ember.Service.extend({
         bindings = this.get('bindings'),
         targetId = target._pusherEventsId(),
         channel = bindings[channelName].channel;
+
+    if(typeof eventsToUnwire === 'string') {
+      eventsToUnwire = [eventsToUnwire];
+    }
 
     // Unbind all the events for this target
     for (let binding in bindings[channelName].eventBindings[targetId]) {
