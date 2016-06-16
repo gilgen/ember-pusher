@@ -104,7 +104,7 @@ var YourController = Em.Controller.extend(EmberPusher.Bindings, {
 ```
 
 ##### Example if the channel name is dynamic
-```
+```javascript
 // some component...
 import Ember from 'ember';
 import EmberPusher from 'ember-pusher';
