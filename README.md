@@ -49,6 +49,7 @@ setupController(controller, model) {
       }
     }
   });
+  
 },
 ```
 
