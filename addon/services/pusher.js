@@ -69,6 +69,29 @@ export default Ember.Service.extend({
     }
   },
 
+  // If you have re-connected pusher, you will probably
+  // want to rewire all of the previous bindings
+  rewire() {
+    let bindings = this.get('bindings'),
+        channelNames = Object.keys(bindings);
+
+    for (let i = 0; i < channelNames.length; i++) {
+      let channelName = channelNames[i];
+      let contextObjects = Object.keys(bindings[channelName].eventBindings);
+
+      for (let j = 0; j < contextObjects.length; j++) {
+        let contextObject = contextObjects[j];
+        let events = bindings[channelName]
+          .eventBindings[contextObject]
+          .map((i) => i.eventName);
+        let target = bindings[channelName]
+          .eventBindings[contextObject][0]
+          .target;
+        this.wire(target, channelName, events);
+      }
+    }
+  },
+
   // @events a hash in the form { channel-name: ['event1', 'event2'] }
   // @target any object that responds to send() and _pusherEventsId()
   wire(target, channelName, events) {
