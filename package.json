@@ -1,6 +1,6 @@
 {
   "name": "ember-pusher",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An implementation of a declarative interface to Pusher for Ember",
   "directories": {
     "doc": "doc",
