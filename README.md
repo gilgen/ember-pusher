@@ -18,7 +18,7 @@ we need to use browserify to bring it into the addon. Unfortunately this means
 that in your app you will need to do the following. That's it.
 
 `npm install --save-dev ember-browserify`  
-`npm install --save-dev pusher-js@3.1.0`
+`npm install --save-dev pusher-js@3.1.0` (check to make sure you don't already have this in your `package.json`)
 
 
 ### Is it good?
