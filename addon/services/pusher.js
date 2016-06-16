@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { keys } from 'ember-pusher/compat';
+import Pusher from "npm:pusher-js";
 
 // Need to track
 // 1) channel object
@@ -55,9 +56,8 @@ export default Ember.Service.extend({
 
   setup(applicationKey, options) {
     Ember.assert("ember-pusher can only be setup once", !this.pusher);
-    Ember.assert("You need to include the pusher libraries", !!window.Pusher);
 
-    this.pusher = new window.Pusher(applicationKey, options);
+    this.pusher = new Pusher(applicationKey, options);
     this.pusher.connection.bind('connected', this._didConnect.bind(this));
     this.pusher.connection.bind('disconnected', this._didDisconnect.bind(this));
     this.pusher.connection.bind('unavailable', this._didDisconnect.bind(this));
@@ -166,7 +166,7 @@ export default Ember.Service.extend({
     return bindings[channelName].channel;
   },
 
-  unwire(target, channelName) {
+  unwire(target, channelName, eventsToUnwire) {
     let pusher = this.pusher,
         bindings = this.get('bindings'),
         targetId = target._pusherEventsId(),
