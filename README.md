@@ -39,9 +39,30 @@ things like that. You can get a list of all the options from
 
 
 ```javascript
-App = Ember.Application.create({
-  PUSHER_OPTS: { key: 'foo', connection: {} }
-});
+// app/pods/application/route.js
+setupController(controller, model) {
+  controller.set('model', model);
+  controller.setupPusherService();
+},
+
+// app/pods/application/controller.js
+pusher: Ember.inject.service(),
+
+...
+
+setupPusherService() {
+  let pusher    = this.get('pusher'),
+      csrfToken = 'your-csrf-token',
+      pusherKey = 'your-pusher-key'
+
+    pusher.setup(pusherKey, {
+      auth: {
+        params: {
+          authenticity_token: csrfToken
+        }
+      }
+    });
+},
 ```
 
 Next, for any controllers that you want to catch pusher events on:
