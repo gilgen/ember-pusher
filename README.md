@@ -24,10 +24,6 @@ that in your app you will need to do the following. That's it.
 ### Is it good?
 Yes
 
-### Is it production ready?
-I guess? Ship it! :shipit:
-
-
 ### How do I use this thing?
 Good question! This is just one example, but the idea below, is that you
 will at some point in your application initialization call the pusher
