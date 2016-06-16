@@ -9,10 +9,16 @@ are natural methods on your controllers. In fact: The full event bubbling
 framework is available to the pusher initiated events.
 
 
-### Download
-- [ember-pusher.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.js)
-- [ember-pusher.min.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.min.js)
-- [ember-pusher.amd.js](https://ember-pusher-builds.s3.amazonaws.com/ember-pusher.amd.js)
+### Install
+In your ember app, run:  
+`npm install --save-dev ember-pusher`
+
+Because ember pusher uses the Pusher library which doesn't have a bower module
+we need to use browserify to bring it into the addon. Unfortunately this means
+that in your app you will need to do the following. That's it.
+
+`npm install --save-dev ember-browserify`  
+`npm install --save-dev pusher-js@3.1.0`
 
 
 ### Is it good?
