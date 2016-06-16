@@ -36,25 +36,19 @@ If you're interested in the kinds of things you can pass in...
 ```javascript
 // app/pods/application/route.js
 setupController(controller, model) {
-  controller.setupPusherService();
-  // ...
-},
 
-// app/pods/application/controller.js
-pusher: Ember.inject.service(),
-
-setupPusherService() {
   let pusher    = this.get('pusher'),
-      csrfToken = 'your-csrf-token',
-      pusherKey = 'your-pusher-key'
-
-    pusher.setup(pusherKey, {
-      auth: {
-        params: {
-          authenticity_token: csrfToken
-        }
+    csrfToken = 'your-csrf-token',
+    pusherKey = 'your-pusher-key';
+  
+  // pusher (the service) is injected into routes and controllers
+  this.get('pusher').setup(pusherKey, {
+    auth: {
+      params: {
+        authenticity_token: csrfToken
       }
-    });
+    }
+  });
 },
 ```
 
