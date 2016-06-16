@@ -58,8 +58,8 @@ Next, for any controllers that you want to catch pusher events on:
 2. Define `PUSHER_SUBSCRIPTIONS` where the keys are channel names and the
    values are arrays of events for the channel. If you have dynamic channel
    names or events, you can totally just construct your `PUSHER_SUBSCRIPTIONS`
-   hash in `init()` of your controller (note: be sure to call ```this._super()``` afterwards). Private channels are fine.
-3. Implement your event handlers on the controller.
+   hash in `init()` of your controller (note: be sure to call ```this._super()``` afterwards). Private channels are fine. As a very dynamic alternative, you can use `wire()` and `unwire()` on the pusher service manually as described below.
+3. Implement your event handlers on the controller according to the conventions.
 
 
 ##### Logging
