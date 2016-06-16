@@ -37,9 +37,8 @@ If you're interested in the kinds of things you can pass in...
 // app/pods/application/route.js
 setupController(controller, model) {
 
-  let pusher    = this.get('pusher'),
-    csrfToken = 'your-csrf-token',
-    pusherKey = 'your-pusher-key';
+  let csrfToken = 'your-csrf-token',
+      pusherKey = 'your-pusher-key';
   
   // pusher (the service) is injected into routes and controllers
   this.get('pusher').setup(pusherKey, {
