@@ -135,6 +135,32 @@ var YourController = Em.Controller.extend(EmberPusher.ClientEvents, {
 });
 ```
 
+##### Example if the channel name is dynamic
+```
+// some component...
+import Ember from 'ember';
+import EmberPusher from 'ember-pusher';
+
+export default Ember.Component.extend(EmberPusher.Bindings, {
+
+  pusher: Ember.inject.service(),
+  pusherEvents: ['event-one', 'event-two'],
+  
+  didInsertElement: Ember.observer('pusherChannelName', function() {
+    let pusher = this.get('pusher');
+    
+    // Signature for wire is wire(target, channelName, events)
+    pusher.wire(this, this.get('model.pusherChannelName'), this.pusherEvents);
+  }),
+  
+  // Clean up when we leave. We probably don't want to still be receiving
+  // events. This is all done automatically if wiring events via PUSHER_SUBSCRIPTIONS.
+  willDestroyElement() {
+    this.get('pusher').unwire(this, this.get('pusherChannelName'));
+  },
+  
+}
+```
 
 
 ### FAQ
