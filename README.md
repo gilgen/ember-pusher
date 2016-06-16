@@ -29,26 +29,23 @@ I guess? Ship it! :shipit:
 
 
 ### How do I use this thing?
-Good question!
-
-First things first: Stick your pusher connection options on your Application
-object. Anything you pass into the `connection` hash will be passed in as
-options to the pusher connection. This is a good place for auth params, and
-things like that. You can get a list of all the options from
-[Pusher's API](http://pusher.com/docs/client_api_guide/client_connect#connecting).
-
+Good question! This is just one example, but the idea below, is that you
+will at some point in your application initialization call the pusher
+service's `setup(args)` method. This method takes in the pusher key and
+a hash of options which get sent to the pusher connect method.  
+  
+If you're interested in the kinds of things you can pass in...
+[Pusher's API](http://pusher.com/docs/client_api_guide/client_connect#connecting)  
 
 ```javascript
 // app/pods/application/route.js
 setupController(controller, model) {
-  controller.set('model', model);
   controller.setupPusherService();
+  // ...
 },
 
 // app/pods/application/controller.js
 pusher: Ember.inject.service(),
-
-...
 
 setupPusherService() {
   let pusher    = this.get('pusher'),
