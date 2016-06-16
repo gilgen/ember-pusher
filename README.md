@@ -17,8 +17,8 @@ Because ember pusher uses the Pusher library which doesn't have a bower module
 we need to use browserify to bring it into the addon. Unfortunately this means
 that in your app you will need to do the following. That's it.
 
-`npm install --save-dev ember-browserify`  
-`npm install --save-dev pusher-js@3.1.0` (check to make sure you don't already have this in your `package.json`)
+`npm install --save-dev ember-browserify` (check to make sure you don't already have this in your `package.json`)  
+`npm install --save-dev pusher-js@3.1.0` (make sure you don't have `pusher` being pulled in in your bower.json)
 
 
 ### Is it good?
