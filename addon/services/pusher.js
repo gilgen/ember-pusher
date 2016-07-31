@@ -184,7 +184,7 @@ export default Ember.Service.extend({
       }
       channel.unbind(binding.eventName, binding.handler);
       eventBindings.splice(index, 1);
-    };
+    }
 
     if (Ember.isEmpty(eventBindings)) {
       delete bindings[channelName].eventBindings[targetId];
