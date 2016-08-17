@@ -176,14 +176,15 @@ export default Ember.Service.extend({
     if(typeof eventsToUnwire === 'string') {
       eventsToUnwire = [eventsToUnwire];
     }
-
-    eventBindings.forEach((binding, index) => {
+    let index = eventBindings.length;
+    while (index--){
+      let binding = eventBindings[index];
       if(eventsToUnwire && !eventsToUnwire.contains(binding.eventName)) {
         return;
       }
       channel.unbind(binding.eventName, binding.handler);
       eventBindings.splice(index, 1);
-    });
+    }
 
     if (Ember.isEmpty(eventBindings)) {
       delete bindings[channelName].eventBindings[targetId];
