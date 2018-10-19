@@ -215,9 +215,8 @@ export default Service.extend({
 
   socketId: computed('isDisconnected', function() {
     try {
-      return this.pusher.connection.socket_id;
-    }
-    catch(error) {
+      return this.get('pusher.connection.socket_id');
+    } catch (error) {
       // eslint-disable-next-line
       console.warn(error);
     }
