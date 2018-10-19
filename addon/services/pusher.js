@@ -1,6 +1,12 @@
-import Ember from 'ember';
-import { keys } from 'ember-pusher/compat';
-import Pusher from "npm:pusher-js";
+import Service from '@ember/service';
+import { not } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { assert } from '@ember/debug';
+import { run } from '@ember/runloop';
+import { camelize } from '@ember/string';
+import { isEmpty } from '@ember/utils';
+import { A } from '@ember/array';
+import Pusher from 'pusher-js';
 
 // Need to track
 // 1) channel object
@@ -44,18 +50,19 @@ import Pusher from "npm:pusher-js";
 //    unsubscribe from the channel
 //    delete the channel from bindings
 
-export default Ember.Service.extend({
+export default Service.extend({
   isDisconnected: true,
-  isConnected: Ember.computed.not('isDisconnected'),
+  isConnected: not('isDisconnected'),
 
   init() {
     this.pusher = null;
     this.set('bindings', {});
     this.logEvents = false;
+    this._super();
   },
 
   setup(applicationKey, options) {
-    Ember.assert("ember-pusher can only be setup once", !this.pusher);
+    assert("ember-pusher can only be setup once", !this.pusher);
 
     this.pusher = new Pusher(applicationKey, options);
     this.pusher.connection.bind('connected', this._didConnect.bind(this));
@@ -95,7 +102,7 @@ export default Ember.Service.extend({
   // @events a hash in the form { channel-name: ['event1', 'event2'] }
   // @target any object that responds to send() and _pusherEventsId()
   wire(target, channelName, events) {
-    Ember.assert("Did you forget to extend the EmberPusher.Bindings mixin in " +
+    assert("Did you forget to extend the EmberPusher.Bindings mixin in " +
         "your class receiving events?", !!target._pusherEventsId);
 
     let channel = this.connectChannel(channelName),
@@ -113,25 +120,27 @@ export default Ember.Service.extend({
 
     // Iterate over the events and bind them
     events.forEach(eventName => {
-      let normalizedEventName = Ember.String.camelize(eventName);
-      let events = bindings[channelName].eventBindings[targetId];
+      let normalizedEventName = camelize(eventName);
+      let events = A(bindings[channelName].eventBindings[targetId]);
       let found;
       let handler = function(data) {
         if (target.get('logPusherEvents')) {
+          // eslint-disable-next-line
           console.log(target.constructor.toString() +
             ": Pusher event received", eventName, data);
         }
-        Ember.run(() => {
+        run(() => {
           target.send(normalizedEventName, data);
         });
       };
 
       channel.bind(eventName, handler);
 
-      if(found = events.findBy('eventName', eventName)) {
+      found = events.findBy('eventName', eventName);
+
+      if (found) {
         found.handler = handler;
-      }
-      else {
+      } else {
         events.pushObject({
           handler: handler,
           eventName: eventName,
@@ -149,12 +158,13 @@ export default Ember.Service.extend({
       bindings[channelName] = { eventBindings: {} };
     }
 
-    if (Ember.isEmpty(keys(bindings[channelName].eventBindings))) {
+    if (isEmpty(Object.keys(bindings[channelName].eventBindings))) {
       bindings[channelName].channel = pusher.subscribe(channelName);
 
       // Spit out a bunch of logging if asked
       if (this.namespace && this.logEvents) {
-        bindings[channelName].channel.bind_all((eventName, data) => {
+        bindings[channelName].channel.bind_global((eventName, data) => {
+          // eslint-disable-next-line
           console.log(
             "Pusher event received on " + channelName + ":",
             eventName,
@@ -186,12 +196,12 @@ export default Ember.Service.extend({
       eventBindings.splice(index, 1);
     }
 
-    if (Ember.isEmpty(eventBindings)) {
+    if (isEmpty(eventBindings)) {
       delete bindings[channelName].eventBindings[targetId];
     }
 
     // Unsubscribe from the channel if this is the last thing listening
-    if (keys(bindings[channelName].eventBindings).length === 0) {
+    if (Object.keys(bindings[channelName].eventBindings).length === 0) {
       pusher.unsubscribe(channelName);
       delete bindings[channelName];
       return true;
@@ -203,11 +213,12 @@ export default Ember.Service.extend({
     return this.get('bindings')[channelName].channel;
   },
 
-  socketId: Ember.computed('isDisconnected', function() {
+  socketId: computed('isDisconnected', function() {
     try {
       return this.pusher.connection.socket_id;
     }
     catch(error) {
+      // eslint-disable-next-line
       console.warn(error);
     }
   }),

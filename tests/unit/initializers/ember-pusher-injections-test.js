@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import Application from '@ember/application';
 import { initialize } from '../../../initializers/ember-pusher-injections';
 import { module, test } from 'qunit';
 
-var registry, application;
+let registry, application;
 
 module('Unit | Initializer | ember pusher injections', {
-  beforeEach: function() {
-    Ember.run(function() {
-      application = Ember.Application.create();
+  beforeEach() {
+    run(() => {
+      application = Application.create();
       registry = application.registry;
       application.deferReadiness();
     });

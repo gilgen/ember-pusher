@@ -1,25 +1,18 @@
-import Ember from 'ember';
+/* global Pusher */
 import { module, test } from 'qunit';
-import startApp from '../helpers/start-app';
-
-module('Acceptance | Controller bindings', {
-  beforeEach: function() {
-    this.application = startApp();
-  },
-
-  afterEach: function() {
-    Ember.run(this.application, 'destroy');
-  }
-});
+import { visit, currentURL } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
 
 function newMessage(message) {
   return Pusher.singleton.trigger('controller-bindings', 'new-message', { message: message });
 }
 
-test('visiting /scenarios/controller-bindings', function(assert) {
-  visit('/scenarios/controller-bindings');
-  
-  andThen(() => {
+module('Acceptance | Controller bindings', function(hooks) {
+  setupApplicationTest(hooks);
+
+  test('visiting /scenarios/controller-bindings', async function(assert) {
+    await visit('/scenarios/controller-bindings');
+
     assert.equal(currentURL(), '/scenarios/controller-bindings');
 
     newMessage("Jamie");
