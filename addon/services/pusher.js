@@ -179,7 +179,7 @@ export default Ember.Service.extend({
     let index = eventBindings.length;
     while (index--){
       let binding = eventBindings[index];
-      if(eventsToUnwire && !eventsToUnwire.contains(binding.eventName)) {
+      if(eventsToUnwire && !eventsToUnwire.includes(binding.eventName)) {
         return;
       }
       channel.unbind(binding.eventName, binding.handler);
