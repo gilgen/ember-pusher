@@ -150,7 +150,7 @@ export default Service.extend({
     });
   },
 
-  connectChannel(channelName, forceConnect = false) {
+  connectChannel(channelName, force = false) {
     let pusher = this.pusher,
         bindings = this.get('bindings');
 
@@ -158,7 +158,7 @@ export default Service.extend({
       bindings[channelName] = { eventBindings: {} };
     }
 
-    if (forceConnect || isEmpty(Object.keys(bindings[channelName].eventBindings))) {
+    if (force || isEmpty(Object.keys(bindings[channelName].eventBindings))) {
       bindings[channelName].channel = pusher.subscribe(channelName);
 
       // Spit out a bunch of logging if asked
