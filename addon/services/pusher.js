@@ -27,7 +27,7 @@ import Pusher from 'pusher-js';
 //    }
 //  }
 //
-//  wire(target, channelName, events)
+//  wire(target, channelName, events, force = false)
 //  ================
 //  Initialize object in bindings if it's empty, with eventBindings: {}
 //  If eventBindings.length for the current target is 0
