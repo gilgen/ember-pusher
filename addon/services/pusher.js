@@ -94,7 +94,7 @@ export default Service.extend({
         let target = bindings[channelName]
           .eventBindings[contextObject][0]
           .target;
-        this.wire(target, channelName, events, force = true);
+        this.wire(target, channelName, events, true);
       }
     }
   },
