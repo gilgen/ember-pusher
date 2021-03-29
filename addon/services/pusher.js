@@ -27,7 +27,7 @@ import Pusher from 'pusher-js';
 //    }
 //  }
 //
-//  wire(target, channelName, events)
+//  wire(target, channelName, events, force = false)
 //  ================
 //  Initialize object in bindings if it's empty, with eventBindings: {}
 //  If eventBindings.length for the current target is 0
@@ -94,18 +94,18 @@ export default Service.extend({
         let target = bindings[channelName]
           .eventBindings[contextObject][0]
           .target;
-        this.wire(target, channelName, events);
+        this.wire(target, channelName, events, true);
       }
     }
   },
 
   // @events a hash in the form { channel-name: ['event1', 'event2'] }
   // @target any object that responds to send() and _pusherEventsId()
-  wire(target, channelName, events) {
+  wire(target, channelName, events, force = false) {
     assert("Did you forget to extend the EmberPusher.Bindings mixin in " +
         "your class receiving events?", !!target._pusherEventsId);
 
-    let channel = this.connectChannel(channelName),
+    let channel = this.connectChannel(channelName, force),
         bindings = this.get('bindings'),
         targetId = target._pusherEventsId();
 
@@ -150,7 +150,7 @@ export default Service.extend({
     });
   },
 
-  connectChannel(channelName) {
+  connectChannel(channelName, force = false) {
     let pusher = this.pusher,
         bindings = this.get('bindings');
 
@@ -158,7 +158,7 @@ export default Service.extend({
       bindings[channelName] = { eventBindings: {} };
     }
 
-    if (isEmpty(Object.keys(bindings[channelName].eventBindings))) {
+    if (force || isEmpty(Object.keys(bindings[channelName].eventBindings))) {
       bindings[channelName].channel = pusher.subscribe(channelName);
 
       // Spit out a bunch of logging if asked
