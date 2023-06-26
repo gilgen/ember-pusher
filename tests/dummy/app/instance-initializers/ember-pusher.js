@@ -5,5 +5,5 @@ export function initialize(instance) {
 
 export default {
   name: 'ember-pusher',
-  initialize: initialize
+  initialize: initialize,
 };

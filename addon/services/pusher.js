@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Service from '@ember/service';
 import { not } from '@ember/object/computed';
 import { computed } from '@ember/object';
@@ -55,16 +56,16 @@ export default Service.extend({
   isConnected: not('isDisconnected'),
 
   init() {
-    this.pusher = null;
+    set(this, 'pusher', null);
     this.set('bindings', {});
     this.logEvents = false;
     this._super();
   },
 
   setup(applicationKey, options) {
-    assert("ember-pusher can only be setup once", !this.pusher);
+    assert('ember-pusher can only be setup once', !this.pusher);
 
-    this.pusher = new Pusher(applicationKey, options);
+    set(this, 'pusher', new Pusher(applicationKey, options));
     this.pusher.connection.bind('connected', this._didConnect.bind(this));
     this.pusher.connection.bind('disconnected', this._didDisconnect.bind(this));
     this.pusher.connection.bind('unavailable', this._didDisconnect.bind(this));
@@ -79,8 +80,8 @@ export default Service.extend({
   // If you have re-connected pusher, you will probably
   // want to rewire all of the previous bindings
   rewire() {
-    let bindings = this.get('bindings'),
-        channelNames = Object.keys(bindings);
+    let bindings = this.bindings,
+      channelNames = Object.keys(bindings);
 
     for (let i = 0; i < channelNames.length; i++) {
       let channelName = channelNames[i];
@@ -88,12 +89,11 @@ export default Service.extend({
 
       for (let j = 0; j < contextObjects.length; j++) {
         let contextObject = contextObjects[j];
-        let events = bindings[channelName]
-          .eventBindings[contextObject]
-          .map((i) => i.eventName);
-        let target = bindings[channelName]
-          .eventBindings[contextObject][0]
-          .target;
+        let events = bindings[channelName].eventBindings[contextObject].map(
+          (i) => i.eventName
+        );
+        let target =
+          bindings[channelName].eventBindings[contextObject][0].target;
         this.wire(target, channelName, events, true);
       }
     }
@@ -102,14 +102,17 @@ export default Service.extend({
   // @events a hash in the form { channel-name: ['event1', 'event2'] }
   // @target any object that responds to send() and _pusherEventsId()
   wire(target, channelName, events, force = false) {
-    assert("Did you forget to extend the EmberPusher.Bindings mixin in " +
-        "your class receiving events?", !!target._pusherEventsId);
+    assert(
+      'Did you forget to extend the EmberPusher.Bindings mixin in ' +
+        'your class receiving events?',
+      !!target._pusherEventsId
+    );
 
     let channel = this.connectChannel(channelName, force),
-        bindings = this.get('bindings'),
-        targetId = target._pusherEventsId();
+      bindings = this.bindings,
+      targetId = target._pusherEventsId();
 
-    if(typeof events === 'string') {
+    if (typeof events === 'string') {
       events = [events];
     }
 
@@ -119,11 +122,11 @@ export default Service.extend({
     }
 
     // Iterate over the events and bind them
-    events.forEach(eventName => {
+    events.forEach((eventName) => {
       let normalizedEventName = camelize(eventName);
       let events = A(bindings[channelName].eventBindings[targetId]);
       let found;
-      let handler = function(data) {
+      let handler = function (data) {
         if (target.get('logPusherEvents')) {
           // eslint-disable-next-line
           console.log(target.constructor.toString() +
@@ -144,7 +147,7 @@ export default Service.extend({
         events.pushObject({
           handler: handler,
           eventName: eventName,
-          target: target
+          target: target,
         });
       }
     });
@@ -152,7 +155,7 @@ export default Service.extend({
 
   connectChannel(channelName, force = false) {
     let pusher = this.pusher,
-        bindings = this.get('bindings');
+      bindings = this.bindings;
 
     if (!bindings[channelName]) {
       bindings[channelName] = { eventBindings: {} };
@@ -166,7 +169,7 @@ export default Service.extend({
         bindings[channelName].channel.bind_global((eventName, data) => {
           // eslint-disable-next-line
           console.log(
-            "Pusher event received on " + channelName + ":",
+            'Pusher event received on ' + channelName + ':',
             eventName,
             data
           );
@@ -178,18 +181,18 @@ export default Service.extend({
 
   unwire(target, channelName, eventsToUnwire) {
     let pusher = this.pusher,
-        bindings = this.get('bindings'),
-        targetId = target._pusherEventsId(),
-        channel = bindings[channelName].channel,
-        eventBindings = bindings[channelName].eventBindings[targetId];
+      bindings = this.bindings,
+      targetId = target._pusherEventsId(),
+      channel = bindings[channelName].channel,
+      eventBindings = bindings[channelName].eventBindings[targetId];
 
-    if(typeof eventsToUnwire === 'string') {
+    if (typeof eventsToUnwire === 'string') {
       eventsToUnwire = [eventsToUnwire];
     }
     let index = eventBindings.length;
-    while (index--){
+    while (index--) {
       let binding = eventBindings[index];
-      if(eventsToUnwire && !eventsToUnwire.contains(binding.eventName)) {
+      if (eventsToUnwire && !eventsToUnwire.contains(binding.eventName)) {
         return;
       }
       channel.unbind(binding.eventName, binding.handler);
@@ -210,17 +213,22 @@ export default Service.extend({
   },
 
   channelFor(channelName) {
-    return this.get('bindings')[channelName].channel;
+    return this.bindings[channelName].channel;
   },
 
-  socketId: computed('isDisconnected', function() {
-    try {
-      return this.get('pusher.connection.socket_id');
-    } catch (error) {
-      // eslint-disable-next-line
-      console.warn(error);
+  socketId: computed(
+    'isDisconnected',
+    'pusher.connection.socket_id',
+    function () {
+      try {
+        return this.pusher.get('connection.socket_id');
+      } catch (error) {
+        // eslint-disable-next-line
+        console.warn(error);
+        return null;
+      }
     }
-  }),
+  ),
 
   _didConnect() {
     this.set('isDisconnected', false);
@@ -228,5 +236,5 @@ export default Service.extend({
 
   _didDisconnect() {
     this.set('isDisconnected', true);
-  }
+  },
 });

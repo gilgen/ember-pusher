@@ -1,10 +1,10 @@
 
-<p>Message: {{input class="message-input" value=message}}</p>
-<p><button {{action "sendMessage" message}}>Send</button></p>
+<p><label>Message: <Input class="message-input" @value={{this.message}} /></label></p>
+<p><button type="button" {{on "click" (fn this.sendMessage this.message)}}>Send</button></p>
 
-<h3>Messages ({{messages.length}})</h3>
+<h3>Messages ({{this.messages.length}})</h3>
 <ul class="message-list">
-  {{#each messages as |message|}}
+  {{#each this.messages as |message|}}
     <li class="message-list-item">{{message}}</li>
   {{/each}}
 </ul>

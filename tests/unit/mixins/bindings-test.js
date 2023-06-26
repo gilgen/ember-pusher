@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 module('Unit | Mixin | bindings');
 
 // Replace this with your real tests.
-test('it works', function(assert) {
+test('it works', function (assert) {
   let BindingsObject = EmberObject.extend(BindingsMixin);
   let subject = BindingsObject.create();
   assert.ok(subject);

@@ -5,5 +5,5 @@ export function initialize(application) {
 
 export default {
   name: 'ember-pusher-injections',
-  initialize: initialize
+  initialize: initialize,
 };
