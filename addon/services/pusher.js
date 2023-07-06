@@ -221,7 +221,7 @@ export default Service.extend({
     'pusher.connection.socket_id',
     function () {
       try {
-        return this.pusher.get('connection.socket_id');
+        return this.pusher ? this.pusher.connection.socket_id : null;
       } catch (error) {
         // eslint-disable-next-line
         console.warn(error);
