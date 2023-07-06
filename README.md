@@ -10,8 +10,7 @@ framework is available to the pusher initiated events.
 
 ### :warning: Warning :warning:
 Some of the documentation below may be significantly out of date.
-The library is currently being reworked to support Ember Octane;
-documentation updates should follow shortly thereafter.
+The library is currently being reworked to ensure support of Ember Octane.
 
 ### Install
 In your ember app, run:
@@ -244,4 +243,4 @@ App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
 
 ### Special thanks
 - [@wycats](https://github.com/wycats) - Architectural advice.
-- May include code originally developed for the [ember-pusher-js](https://github.com/starshot-tech/ember-pusher-js) fork by [@lrdiv](https://github.com/lrdiv) and [@jdurand](https://github.com/jdurand).
+- May include code originally written for or inspired by the [ember-pusher-js](https://github.com/starshot-tech/ember-pusher-js) fork by [@lrdiv](https://github.com/lrdiv) and [@jdurand](https://github.com/jdurand).
