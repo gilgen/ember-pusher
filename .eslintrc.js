@@ -19,7 +19,12 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    // hope to phase these out eventually
+    'ember/no-classic-classes': 'warn',
+    'ember/no-mixins': 'warn',
+    'ember/no-new-mixins': 'warn',
+  },
   overrides: [
     // node files
     {

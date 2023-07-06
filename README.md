@@ -8,16 +8,20 @@ user traverses through your application. The interface to event handlers
 are natural methods on your controllers. In fact: The full event bubbling
 framework is available to the pusher initiated events.
 
+### :warning: Warning :warning:
+Some of the documentation below may be significantly out of date.
+The library is currently being reworked to support Ember Octane;
+documentation updates should follow shortly thereafter.
 
 ### Install
-In your ember app, run:  
+In your ember app, run:
 `npm install --save-dev ember-pusher`
 
 Because ember pusher uses the Pusher library which doesn't have a bower module
 we need to use browserify to bring it into the addon. Unfortunately this means
 that in your app you will need to do the following. That's it.
 
-`npm install --save-dev ember-browserify` (check to make sure you don't already have this in your `package.json`)  
+`npm install --save-dev ember-browserify` (check to make sure you don't already have this in your `package.json`)
 `npm install --save-dev pusher-js@3.1.0` (make sure you don't have `pusher` being pulled in in your bower.json)
 
 
@@ -28,10 +32,10 @@ Yes
 Good question! This is just one example, but the idea below, is that you
 will at some point in your application initialization call the pusher
 service's `setup(args)` method. This method takes in the pusher key and
-a hash of options which get sent to the pusher connect method.  
-  
+a hash of options which get sent to the pusher connect method.
+
 If you're interested in the kinds of things you can pass in...
-[Pusher's API](http://pusher.com/docs/client_api_guide/client_connect#connecting)  
+[Pusher's API](http://pusher.com/docs/client_api_guide/client_connect#connecting)
 
 ```javascript
 // app/pods/application/route.js
@@ -39,7 +43,7 @@ setupController(controller, model) {
 
   let csrfToken = 'your-csrf-token',
       pusherKey = 'your-pusher-key';
-  
+
   // pusher (the service) is injected into routes and controllers
   this.get('pusher').setup(pusherKey, {
     auth: {
@@ -48,7 +52,7 @@ setupController(controller, model) {
       }
     }
   });
-  
+
 },
 ```
 
@@ -115,27 +119,27 @@ export default Ember.Component.extend(EmberPusher.Bindings, {
 
   didInsertElement() {
     let pusher = this.get('pusher');
-    
+
     // Signature for wire is wire(target, channelName, events)
     pusher.wire(this, this.get('channelName'), this.get('pusherEvents'));
   }),
-  
+
   // Clean up when we leave. We probably don't want to still be receiving
   // events. This is all done automatically if wiring events via PUSHER_SUBSCRIPTIONS.
   willDestroyElement() {
     this.get('pusher').unwire(this, this.get('channelName'));
   },
-  
+
   actions: {
     eventOne() {
       console.log('event one!');
     },
-    
+
     eventTwo() {
       console.log('event two!');
     }
   }
-  
+
 }
 ```
 
@@ -238,5 +242,6 @@ App.MyController = Ember.Controller.extend(EmberPusher.Bindings, {
 ### Building
 `grunt build` - build 'er
 
-### Contributors
-[@wycats](https://github.com/wycats) - Architectural advice.
+### Special thanks
+- [@wycats](https://github.com/wycats) - Architectural advice.
+- May include code originally developed for the [ember-pusher-js](https://github.com/starshot-tech/ember-pusher-js) fork by [@lrdiv](https://github.com/lrdiv) and [@jdurand](https://github.com/jdurand).
