@@ -1,6 +1,6 @@
 {
   "name": "ember-pusher",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "An implementation of a declarative interface to Pusher for Ember",
   "directories": {
     "doc": "doc",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jamiebikies/ember-pusher.git"
+    "url": "git://github.com/gilgen/ember-pusher.git"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
