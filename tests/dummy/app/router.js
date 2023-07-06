@@ -1,14 +1,13 @@
-import Ember from 'ember';
-import config from './config/environment';
+import EmberRouter from '@ember/routing/router';
+import config from 'dummy/config/environment';
 
-var Router = Ember.Router.extend({
-  location: config.locationType
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
-Router.map(function() {
-  this.route('scenarios', function() {
+Router.map(function () {
+  this.route('scenarios', function () {
     this.route('controller-bindings');
   });
 });
-
-export default Router;

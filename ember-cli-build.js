@@ -1,12 +1,28 @@
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
+'use strict';
 
-module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+
+module.exports = function (defaults) {
+  let app = new EmberAddon(defaults, {
     // Add options here
   });
 
-  app.import('bower_components/pusher-test-stub/dist/pusher-test-stub.js');
+  /*
+    This build file specifies the options for the dummy test app of this
+    addon, located in `/tests/dummy`
+    This build file does *not* influence how the addon or the app using it
+    behave. You most likely want to be modifying `./index.js` or app's build file
+  */
 
-  return app.toTree();
+  app.import('node_modules/pusher-js/dist/web/pusher.js');
+  //app.import('vendor/pusher-test-stub.js');
+
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };

@@ -1,23 +1,27 @@
-import Ember from 'ember';
+/* global Pusher */
+import Controller from '@ember/controller';
+import { action, computed } from '@ember/object';
 import EmberPusher from 'ember-pusher';
 
-export default Ember.Controller.extend(EmberPusher.Bindings, {
+const PUSHER_SUBSCRIPTIONS = {
+  'controller-bindings': ['new-message'],
+};
 
-  PUSHER_SUBSCRIPTIONS: {
-    "controller-bindings": ['new-message']
-  },
+// eslint-disable-next-line ember/no-classic-classes
+export default Controller.extend(EmberPusher.Bindings, {
+  PUSHER_SUBSCRIPTIONS,
 
-  messages: [],
+  messages: computed(function () {
+    return [];
+  }),
 
-  actions: {
-    sendMessage(message) {
-      Pusher.singleton.trigger('controller-bindings', 'new-message', {
-        message: message
-      });
-    },
+  sendMessage: action(function (message) {
+    Pusher.singleton.trigger('controller-bindings', 'new-message', {
+      message: message,
+    });
+  }),
 
-    newMessage(data) {
-      this.messages.pushObject(data.message);
-    }
-  }
+  newMessage: action(function (data) {
+    this.messages.pushObject(data.message);
+  }),
 });

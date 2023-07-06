@@ -1,10 +1,12 @@
-import Ember from 'ember';
-import { keys } from 'ember-pusher/compat';
+import Mixin from '@ember/object/mixin';
+import { inject as service } from '@ember/service';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
+  pusher: service(),
+
   init() {
     if (this.PUSHER_SUBSCRIPTIONS) {
-      keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
+      Object.keys(this.PUSHER_SUBSCRIPTIONS).forEach((channelName) => {
         let events = this.PUSHER_SUBSCRIPTIONS[channelName];
         this.pusher.wire(this, channelName, events);
       });
@@ -15,7 +17,7 @@ export default Ember.Mixin.create({
 
   willDestroy() {
     if (this.PUSHER_SUBSCRIPTIONS) {
-      keys(this.PUSHER_SUBSCRIPTIONS).forEach(channelName => {
+      Object.keys(this.PUSHER_SUBSCRIPTIONS).forEach((channelName) => {
         this.pusher.unwire(this, channelName);
       });
     }
@@ -25,5 +27,5 @@ export default Ember.Mixin.create({
 
   _pusherEventsId() {
     return this.toString();
-  }
+  },
 });
