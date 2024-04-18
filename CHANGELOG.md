@@ -1,3 +1,10 @@
+# 3.0.0-alpha.2
+
+* [BREAKING] Removed injection initializer for the `pusher` service.
+  The service must now be injected explicitly into any routes or
+  controllers where it is used, if you are not already doing so.
+  This change is required for Ember 5 support.
+
 # 3.0.0-alpha.0
 
 * Dropped support for Node <12
