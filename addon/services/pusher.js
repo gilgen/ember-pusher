@@ -108,6 +108,10 @@ export default Service.extend({
       !!target._pusherEventsId
     );
 
+    if (!channelName) {
+      throw new Error('Channel name is required to wire a channel');
+    }
+
     let channel = this.connectChannel(channelName, force),
       bindings = this.bindings,
       targetId = target._pusherEventsId();
@@ -129,8 +133,11 @@ export default Service.extend({
       let handler = function (data) {
         if (target.get('logPusherEvents')) {
           // eslint-disable-next-line
-          console.log(target.constructor.toString() +
-            ": Pusher event received", eventName, data);
+          console.log(
+            target.constructor.toString() + ': Pusher event received',
+            eventName,
+            data
+          );
         }
         run(() => {
           target.send(normalizedEventName, data);
@@ -180,6 +187,10 @@ export default Service.extend({
   },
 
   unwire(target, channelName, eventsToUnwire) {
+    if (!channelName) {
+      throw new Error('Channel name is required to unwire a channel');
+    }
+
     let pusher = this.pusher,
       bindings = this.bindings,
       targetId = target._pusherEventsId(),
